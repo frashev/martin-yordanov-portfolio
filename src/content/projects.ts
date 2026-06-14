@@ -1,4 +1,5 @@
 import type { ProcessStep, Project } from "./types";
+import { assetPath } from "./asset";
 
 export const projects: Project[] = [
   {
@@ -9,7 +10,7 @@ export const projects: Project[] = [
       "A round wooden table with an illuminated sand bed, glass top, and exposed structural rhythm below the rim.",
     description:
       "The kinetic sand table presents slow, graphic motion as furniture. The visible build combines a circular wooden frame, a lit sand surface, a protective glass layer, and a leg structure that leaves the mechanism visually present instead of hidden.",
-    imageSrc: "/martin/kinetic-sand-table-hero.jpg",
+    imageSrc: assetPath("martin/kinetic-sand-table-hero.jpg"),
     imageAlt:
       "Kinetic sand table viewed from the side with a glowing sand surface and wooden frame",
     materials: ["Wood frame", "Sand bed", "Glass top", "Integrated lighting", "Mechanical drive"],
@@ -27,7 +28,7 @@ export const projects: Project[] = [
       "A wall-mounted plotting machine that pulls a drawing tool across a large surface and leaves layered, colorful marks.",
     description:
       "The wall plotter turns mechanism into drawing. The project images show rails, belts or cables, a toolhead, electronics, and a large-scale marked surface, making the build process as important as the finished output.",
-    imageSrc: "/martin/wall-plotter-hero.jpg",
+    imageSrc: assetPath("martin/wall-plotter-hero.jpg"),
     imageAlt:
       "Wall-mounted plotting machine installed above a large colorful drawing",
     materials: ["Linear rail", "Cable-driven toolhead", "Electronics enclosure", "Drawing tools", "Large paper surface"],

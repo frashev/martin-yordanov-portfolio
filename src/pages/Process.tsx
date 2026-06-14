@@ -5,6 +5,7 @@ import Reveal from "../components/Reveal";
 import { profile } from "../content/profile";
 import { processSteps } from "../content/projects";
 import { seo } from "../content/seo";
+import { assetPath } from "../content/asset";
 
 export default function Process() {
   return (
@@ -22,7 +23,7 @@ export default function Process() {
           </div>
         </div>
         <GalleryImage
-          src="/martin/wall-plotter-controller.jpg"
+          src={assetPath("martin/wall-plotter-controller.jpg")}
           alt="Electronics and wiring inside a black enclosure on a workbench"
           aspect="video"
           className="shadow-xl"

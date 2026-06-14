@@ -1,4 +1,5 @@
 import type { Profile } from "./types";
+import { assetPath } from "./asset";
 
 export const profile: Profile = {
   name: "Martin Yordanov",
@@ -13,7 +14,7 @@ export const profile: Profile = {
   ],
   bookingCtaLabel: "Discuss a project",
   contactEmail: "hello@example.com",
-  heroSrc: "/martin/kinetic-sand-table-hero.jpg",
+  heroSrc: assetPath("martin/kinetic-sand-table-hero.jpg"),
   heroAlt: "A round kinetic sand table with an illuminated wooden rim and carved sand pattern",
   contactIntro:
     "Use this form for commissions, collaborations, repairs, documentation requests, or a conversation about one of Martin's machines. Replace the placeholder email and connect Supabase before launch.",
