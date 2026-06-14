@@ -3,7 +3,6 @@ import { Link } from "react-router";
 import GalleryImage from "../components/GalleryImage";
 import PageMeta from "../components/PageMeta";
 import Reveal from "../components/Reveal";
-import StatsBand from "../components/StatsBand";
 import { gallery } from "../content/media";
 import { profile } from "../content/profile";
 import { projects } from "../content/projects";
@@ -87,8 +86,6 @@ export default function Home() {
           ))}
         </div>
       </section>
-
-      <StatsBand />
 
       <section className="mx-auto max-w-6xl px-4 py-16">
         <Reveal>
