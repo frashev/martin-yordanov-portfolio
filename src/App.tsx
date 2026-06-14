@@ -1,6 +1,10 @@
 import { lazy, Suspense } from "react";
 import type { ReactNode } from "react";
-import { createBrowserRouter, RouterProvider } from "react-router";
+import {
+  createBrowserRouter,
+  createHashRouter,
+  RouterProvider,
+} from "react-router";
 import Layout from "./components/Layout";
 
 const Home = lazy(() => import("./pages/Home"));
@@ -25,27 +29,24 @@ function routeElement(element: ReactNode) {
   return <Suspense fallback={<RouteFallback />}>{element}</Suspense>;
 }
 
-const basename =
-  import.meta.env.BASE_URL === "/"
-    ? undefined
-    : import.meta.env.BASE_URL.replace(/\/$/, "");
+const routes = [
+  {
+    element: <Layout />,
+    children: [
+      { index: true, element: routeElement(<Home />) },
+      { path: "projects", element: routeElement(<Projects />) },
+      { path: "process", element: routeElement(<Process />) },
+      { path: "gallery", element: routeElement(<Gallery />) },
+      { path: "contact", element: routeElement(<Contact />) },
+      { path: "*", element: routeElement(<NotFound />) },
+    ],
+  },
+];
 
-const router = createBrowserRouter(
-  [
-    {
-      element: <Layout />,
-      children: [
-        { index: true, element: routeElement(<Home />) },
-        { path: "projects", element: routeElement(<Projects />) },
-        { path: "process", element: routeElement(<Process />) },
-        { path: "gallery", element: routeElement(<Gallery />) },
-        { path: "contact", element: routeElement(<Contact />) },
-        { path: "*", element: routeElement(<NotFound />) },
-      ],
-    },
-  ],
-  { basename },
-);
+const router =
+  import.meta.env.BASE_URL === "/"
+    ? createBrowserRouter(routes)
+    : createHashRouter(routes);
 
 function App() {
   return <RouterProvider router={router} />;

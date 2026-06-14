@@ -3,6 +3,9 @@
 React 19 + React Router 7 + Tailwind CSS v4 portfolio site for Martin Yordanov,
 focused on kinetic furniture, drawing machines, and functional art objects.
 
+Live GitHub Pages URL:
+https://frashev.github.io/martin-yordanov-portfolio/
+
 ## Current Content
 
 - Home page with Martin's positioning and project imagery.
