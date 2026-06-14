@@ -1,0 +1,76 @@
+## ADDED Requirements
+
+### Requirement: Navigation items are sourced from a content module
+
+The primary navigation link list (path, label, and active-match behavior) SHALL be sourced from a typed content module at `src/content/navigation.ts`. `Header.tsx` SHALL NOT hardcode the link list inline.
+
+#### Scenario: Adding a nav link is a content-only edit
+
+- **WHEN** a maintainer adds a new entry to `primaryNav` in `src/content/navigation.ts`
+- **THEN** the new link appears in the header navigation
+- **AND** no edit to `Header.tsx` or any other component is required
+
+#### Scenario: Renaming a nav label is a content-only edit
+
+- **WHEN** a maintainer changes the `label` of an existing entry in `primaryNav`
+- **THEN** the rendered link text in `Header.tsx` updates accordingly
+- **AND** no edit to `Header.tsx` is required
+
+### Requirement: Profile identity lives in a single content module
+
+Identity-related copy used across Home, About, and Contact (name, tagline, intro, bio paragraphs, booking CTA label, contact email, and contact intro) SHALL be sourced from a single typed module at `src/content/profile.ts`.
+
+#### Scenario: Updating contact email is a single-file edit
+
+- **WHEN** a maintainer changes `contactEmail` in `src/content/profile.ts`
+- **THEN** the Contact page and any other surface that displays the email reflects the new value
+- **AND** no other file needs to be edited
+
+#### Scenario: Updating the booking CTA label is a single-file edit
+
+- **WHEN** a maintainer changes `bookingCtaLabel` in `src/content/profile.ts`
+- **THEN** the Home hero CTA button text updates
+- **AND** no edit to `Home.tsx` is required
+
+### Requirement: Media items live in a single content module
+
+Gallery items and videos SHALL be sourced from a single typed module at `src/content/media.ts`, exporting `gallery` and `videos` arrays.
+
+#### Scenario: Adding a gallery item is a single-file edit
+
+- **WHEN** a maintainer appends a new entry to the `gallery` array in `src/content/media.ts`
+- **THEN** the Gallery page renders the additional item
+- **AND** no edit to `Gallery.tsx` is required
+
+#### Scenario: Adding a video is a single-file edit
+
+- **WHEN** a maintainer appends a new entry to the `videos` array in `src/content/media.ts`
+- **THEN** the Videos page renders the additional item
+- **AND** no edit to `Videos.tsx` is required
+
+### Requirement: Domain lists export plain typed arrays
+
+The content modules for Projects, Workshops, and Events SHALL each export a single typed array of items (e.g. `projects: Project[]`), without wrapping them in a per-page content object.
+
+#### Scenario: Adding a project is a single-file edit
+
+- **WHEN** a maintainer appends a new entry to the `projects` array in `src/content/projects.ts`
+- **THEN** the Projects page renders the additional entry
+- **AND** no edit to `Projects.tsx` is required
+
+## MODIFIED Requirements
+
+### Requirement: Content types are centralized
+
+Content-related TypeScript types (`Profile`, `NavItem`, `Project`, `Workshop`, `EventItem`, `GalleryItem`, `Video`) SHALL be defined in a single location (`src/content/types.ts`) and imported by each content module. Page-content wrapper types (e.g. `HomeContent`, `AboutContent`, `ContactContent`, `ListPageContent<T>`) SHALL NOT exist in the type module; pages render headings and intro copy inline.
+
+#### Scenario: Types are imported, not redeclared
+
+- **WHEN** a content module declares its export
+- **THEN** the shape annotation is imported from `src/content/types.ts`
+- **AND** the type is not redeclared ad-hoc inside the content module
+
+#### Scenario: No page-content wrapper types
+
+- **WHEN** inspecting `src/content/types.ts`
+- **THEN** no exported type wraps a `heading` + `intro` + `items` triple for the purpose of grouping page chrome with page data

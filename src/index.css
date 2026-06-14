@@ -1,0 +1,292 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #f7f3ea;
+  --ink: #1d2421;
+  --ink-muted: #606b65;
+  --accent: #1f6f8b;
+  --accent-soft: #d5e8e7;
+  --accent-2: #c48a2c;
+  --card-surface: #fffdf7;
+  --soft-border: #ddd4c5;
+  --header-bg: rgba(247, 243, 234, 0.9);
+
+  --font-display:
+    "Iowan Old Style", "Apple Garamond", Georgia, "Times New Roman", serif;
+  --font-body: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  /* Motion tokens — keep subtle & fast (~200–400ms), ease-out, no bounce.
+     Documented in docs/reference/style-guide.md ("Motion"). */
+  --motion-fast: 200ms;
+  --motion-base: 320ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --reveal-offset: 12px;
+  --stagger-step: 80ms;
+}
+
+/* Dark theme — warm deep-brown palette, not cold grey.
+   Activated by data-theme="dark" on <html> (set by useTheme hook + FOWT script). */
+[data-theme="dark"] {
+  --paper: #111615;
+  --ink: #edf0ea;
+  --ink-muted: #a9b2aa;
+  --accent: #58b7c7;
+  --accent-soft: #18343a;
+  --accent-2: #d6a14a;
+  --card-surface: #171f1d;
+  --soft-border: #2c3935;
+  --header-bg: rgba(17, 22, 21, 0.92);
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+/* ============================================================
+   Editorial motion
+   Motion is enabled regardless of the OS reduced-motion preference,
+   so the site keeps its sense of machine motion.
+   ============================================================ */
+
+/* Scroll-reveal animates below-the-fold content. Above-the-fold hero content
+   stays static so opening the mobile menu never overlaps with moving text. */
+.reveal,
+.entrance {
+  opacity: 1;
+}
+
+.reveal {
+  transform: translateY(var(--reveal-offset));
+  transition: transform var(--motion-base) var(--ease-out)
+    var(--reveal-delay, 0ms);
+}
+.reveal.is-revealed,
+.reveal.revealed {
+  transform: none;
+}
+
+.entrance {
+  transform: none;
+  animation: none;
+}
+
+/* Link underline micro-interaction — pseudo-element, so no layout shift. */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 1.5px;
+  width: 100%;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+.link-underline:hover::after,
+.link-underline:focus-visible::after {
+  transform: scaleX(1);
+}
+.link-underline::after {
+  transition: transform var(--motion-fast) var(--ease-out);
+}
+
+.floating-cta {
+  will-change: opacity, transform;
+}
+.floating-cta {
+  transition:
+    opacity var(--motion-base) var(--ease-out),
+    transform var(--motion-base) var(--ease-out);
+}
+
+/* Animated hamburger <-> close icon. State (.is-open) applies with or without
+   motion; only the tween between states is gated. */
+.hamburger {
+  position: relative;
+  display: block;
+  width: 20px;
+  height: 14px;
+}
+.hamburger span {
+  position: absolute;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  border-radius: 2px;
+  background: currentColor;
+}
+.hamburger span:nth-child(1) {
+  top: 0;
+}
+.hamburger span:nth-child(2) {
+  top: 6px;
+}
+.hamburger span:nth-child(3) {
+  top: 12px;
+}
+.hamburger.is-open span:nth-child(1) {
+  top: 6px;
+  transform: rotate(45deg);
+}
+.hamburger.is-open span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.is-open span:nth-child(3) {
+  top: 6px;
+  transform: rotate(-45deg);
+}
+.hamburger span {
+  transition:
+    top var(--motion-fast) var(--ease-out),
+    transform var(--motion-fast) var(--ease-out),
+    opacity var(--motion-fast) var(--ease-out);
+}
+
+/* Smart image — lazy-load with CSS fade-in.
+   Warm gradient is visible while the real image loads.
+   Fade runs regardless of the OS reduced-motion preference. */
+.gallery-image {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #eee6d8 0%, #d7e8e5 100%);
+  border-radius: 8px;
+}
+[data-theme="dark"] .gallery-image {
+  background: linear-gradient(135deg, #1b2724 0%, #111615 100%);
+}
+.gallery-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+}
+.gallery-image img {
+  opacity: 0;
+  transition: opacity var(--motion-base) var(--ease-out);
+}
+.gallery-image img.is-loaded {
+  opacity: 1;
+}
+
+/* Warm CTA / placeholder gradients — hardcoded fills that must flip with the
+   theme (they are not driven by a single color token). Light values match the
+   original inline styles; dark values stay in the warm-brown family. */
+.warm-surface {
+  background: linear-gradient(135deg, #eee6d8 0%, #d5e8e7 100%);
+}
+[data-theme="dark"] .warm-surface {
+  background: linear-gradient(135deg, #17211f 0%, #18343a 100%);
+}
+
+.placeholder-surface {
+  background: linear-gradient(135deg, #eee6d8 0%, #d5e8e7 100%);
+}
+[data-theme="dark"] .placeholder-surface {
+  background: linear-gradient(135deg, #1b2724 0%, #111615 100%);
+}
+
+/* Lightbox overlay — portal-rendered, position:fixed above everything. */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: min(90vw, 900px);
+  max-height: 90vh;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--card-surface);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  background: var(--card-surface);
+  color: var(--ink);
+  opacity: 0.9;
+}
+.lightbox-close:hover {
+  opacity: 1;
+}
+.lightbox-close:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.lightbox-overlay {
+  animation: lightbox-in var(--motion-fast) var(--ease-out) forwards;
+}
+@keyframes lightbox-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.lightbox-content {
+  animation: lightbox-scale var(--motion-fast) var(--ease-out) forwards;
+}
+@keyframes lightbox-scale {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Route cross-fade via the View Transitions API (progressive enhancement;
+   React Router triggers it through the `viewTransition` prop). */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--motion-base);
+  animation-timing-function: var(--ease-out);
+}

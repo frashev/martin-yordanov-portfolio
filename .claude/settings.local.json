@@ -1,0 +1,6 @@
+{
+  "permissions": {
+    "allow": ["Bash(openspec instructions *)", "Bash(openspec status *)"]
+  },
+  "prefersReducedMotion": true
+}

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- The hero image is the Home LCP element; it's prioritised on Home via
+         the <img fetchpriority="high"> on the hero itself, not a global preload
+         (a global preload would download it on every route that never shows it). -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Martin Yordanov</title>
+    <!-- FOWT: apply saved/OS theme before first paint to prevent flash.
+         "dark"/"light" are pinned; "system" or no value follows the OS. -->
+    <script>
+      (function () {
+        try {
+          var s = localStorage.getItem("theme");
+          var followOs = s === "system" || !s;
+          if (
+            s === "dark" ||
+            (followOs &&
+              window.matchMedia("(prefers-color-scheme: dark)").matches)
+          ) {
+            document.documentElement.setAttribute("data-theme", "dark");
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

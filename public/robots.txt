@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://frashev.github.io/martin-yordanov-portfolio/sitemap.xml

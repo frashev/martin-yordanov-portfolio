@@ -1,0 +1,69 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev)",
+      "Bash(npm run build)",
+      "Bash(npm run preview)",
+      "Bash(npm run lint)",
+      "Bash(npm run test)",
+      "Bash(npm run test:e2e)",
+      "Bash(npx vitest *)",
+      "Bash(npx playwright *)",
+      "Bash(npx tsc *)",
+      "Bash(npx eslint *)",
+      "Bash(npx prettier *)",
+      "Bash(git status)",
+      "Bash(git status *)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git show *)",
+      "Bash(git add *)",
+      "Bash(git branch *)",
+      "Bash(openspec list *)",
+      "Bash(openspec show *)",
+      "Bash(openspec diff *)",
+      "Bash(openspec validate *)"
+    ],
+    "ask": [
+      "Bash(npm install *)",
+      "Bash(npm uninstall *)",
+      "Bash(npm update *)",
+      "Bash(npm ci *)",
+      "Bash(npm run deploy)",
+      "Bash(wrangler *)",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(git reset *)",
+      "Bash(git rebase *)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(rm -r *)",
+      "Bash(git push --force *)",
+      "Bash(git push -f *)"
+    ]
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx prettier --write . --log-level warn; exit 0",
+            "shell": "powershell",
+            "timeout": 60,
+            "statusMessage": "Formatting with Prettier..."
+          },
+          {
+            "type": "command",
+            "command": "npm audit; exit 0",
+            "shell": "powershell",
+            "timeout": 30,
+            "statusMessage": "Running npm audit...",
+            "async": true
+          }
+        ]
+      }
+    ]
+  }
+}

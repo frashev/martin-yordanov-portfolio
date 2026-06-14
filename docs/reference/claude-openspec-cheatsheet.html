@@ -1,0 +1,1324 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Claude Code CLI + OpenSpec Cheat Sheet</title>
+    <style>
+      :root {
+        --ink: #0f172a;
+        --muted: #64748b;
+        --line: #e2e8f0;
+        --soft: #f8fafc;
+        --blue: #2563eb;
+        --green: #059669;
+        --violet: #7c3aed;
+        --orange: #d97706;
+        --red: #dc2626;
+        --cyan: #0891b2;
+        --mono:
+          ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        --sans: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        font-size: 13px;
+      }
+      body {
+        font-family: var(--sans);
+        color: var(--ink);
+        background: #fff;
+        line-height: 1.5;
+        padding: 28px 32px 40px;
+      }
+
+      /* --- HEADER --- */
+      .header {
+        display: flex;
+        align-items: baseline;
+        gap: 16px;
+        margin-bottom: 24px;
+        border-bottom: 2px solid var(--ink);
+        padding-bottom: 12px;
+      }
+      .header h1 {
+        font-size: 22px;
+        letter-spacing: -0.03em;
+      }
+      .header p {
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      /* --- LAYOUT --- */
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+      .col-span-2 {
+        grid-column: span 2;
+      }
+      .col-span-3 {
+        grid-column: span 3;
+      }
+
+      section {
+        margin-bottom: 16px;
+      }
+
+      /* --- CARD --- */
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .card-head {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #fff;
+      }
+      .card-body {
+        padding: 10px 12px;
+        background: #fff;
+      }
+
+      /* card head colors */
+      .head-blue {
+        background: var(--blue);
+      }
+      .head-green {
+        background: var(--green);
+      }
+      .head-violet {
+        background: var(--violet);
+      }
+      .head-orange {
+        background: var(--orange);
+      }
+      .head-red {
+        background: var(--red);
+      }
+      .head-cyan {
+        background: var(--cyan);
+      }
+      .head-ink {
+        background: var(--ink);
+      }
+
+      /* --- COMMAND TABLE --- */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      tr + tr td {
+        border-top: 1px solid var(--line);
+      }
+      td {
+        padding: 5px 6px;
+        vertical-align: top;
+        font-size: 12px;
+        color: #334155;
+      }
+      td:first-child {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--ink);
+        white-space: nowrap;
+        width: 1%;
+        padding-right: 10px;
+      }
+
+      /* --- FLOW --- */
+      .flow {
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        gap: 6px;
+      }
+      .step {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 8px 8px 7px;
+        background: var(--soft);
+        position: relative;
+      }
+      .step-num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        background: var(--blue);
+        color: #fff;
+        border-radius: 4px;
+        font-size: 10px;
+        font-weight: 800;
+        margin-bottom: 5px;
+      }
+      .step-title {
+        font-weight: 700;
+        font-size: 11px;
+        color: var(--ink);
+        margin-bottom: 3px;
+      }
+      .step-cmd {
+        font-family: var(--mono);
+        font-size: 10px;
+        color: var(--blue);
+        margin-bottom: 3px;
+      }
+      .step-note {
+        font-size: 10px;
+        color: var(--muted);
+        line-height: 1.4;
+      }
+
+      /* --- BADGE --- */
+      .badge {
+        display: inline-block;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .badge-blue {
+        background: #dbeafe;
+        color: #1d4ed8;
+      }
+      .badge-green {
+        background: #d1fae5;
+        color: #047857;
+      }
+      .badge-orange {
+        background: #ffedd5;
+        color: #c2410c;
+      }
+      .badge-red {
+        background: #fee2e2;
+        color: #b91c1c;
+      }
+      .badge-violet {
+        background: #ede9fe;
+        color: #6d28d9;
+      }
+      .badge-cyan {
+        background: #cffafe;
+        color: #0e7490;
+      }
+
+      /* --- CONTEXT METER --- */
+      .meter-wrap {
+        margin: 8px 0 4px;
+      }
+      .meter {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        height: 20px;
+        border-radius: 6px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+      }
+      .meter-seg {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        font-weight: 700;
+      }
+      .seg-green {
+        background: #22c55e;
+        color: #fff;
+      }
+      .seg-yellow {
+        background: #eab308;
+        color: #fff;
+      }
+      .seg-orange {
+        background: #f97316;
+        color: #fff;
+      }
+      .seg-red {
+        background: #ef4444;
+        color: #fff;
+      }
+      .meter-labels {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        margin-top: 3px;
+        font-size: 10px;
+        color: var(--muted);
+      }
+      .meter-labels span {
+        text-align: center;
+      }
+
+      /* --- RULE ROW --- */
+      .rule-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 6px;
+        padding: 5px 0;
+        font-size: 12px;
+        color: #334155;
+        border-top: 1px solid var(--line);
+      }
+      .rule-row:first-child {
+        border-top: none;
+      }
+      .rule-icon {
+        flex: 0 0 16px;
+        font-size: 11px;
+        margin-top: 1px;
+      }
+
+      /* --- TIER (change-volume) TABLE --- */
+      .tier-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .tier-table th {
+        text-align: left;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        padding: 6px 8px;
+        border-bottom: 2px solid var(--line);
+      }
+      .tier-table td {
+        padding: 9px 8px;
+        vertical-align: top;
+        font-size: 11.5px;
+        color: #334155;
+        border-top: 1px solid var(--line);
+      }
+      .tier-table td.tier-flow {
+        font-family: var(--mono);
+        font-size: 10.5px;
+        color: var(--ink);
+        line-height: 1.6;
+      }
+      .tier-table .ok {
+        color: var(--green);
+        font-weight: 600;
+      }
+      .tier-table .no {
+        color: var(--red);
+      }
+      .sep {
+        color: var(--line);
+      }
+
+      /* --- PRINT --- */
+      @media print {
+        body {
+          padding: 14mm;
+          font-size: 11px;
+        }
+        .card {
+          break-inside: avoid;
+        }
+        .flow {
+          break-inside: avoid;
+        }
+      }
+
+      @media (max-width: 900px) {
+        .grid,
+        .grid-2 {
+          grid-template-columns: 1fr;
+        }
+        .col-span-2,
+        .col-span-3 {
+          grid-column: span 1;
+        }
+        .flow {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        body {
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Claude Code CLI + OpenSpec Cheat Sheet</h1>
+      <p>Spec first &rarr; Agent executes &rarr; Verify with proof</p>
+    </div>
+
+    <!-- ============================================================
+       ROW 1: Session  |  Code Quality  |  Scale & Discovery
+  ============================================================= -->
+    <section class="grid">
+      <!-- SESSION MANAGEMENT -->
+      <div class="card">
+        <div class="card-head head-blue">&#9670; Session management</div>
+        <div class="card-body">
+          <table>
+            <tr>
+              <td>/clear</td>
+              <td>Reset context — use between unrelated tasks</td>
+            </tr>
+            <tr>
+              <td>/compact</td>
+              <td>Compress long context, preserving key decisions</td>
+            </tr>
+            <tr>
+              <td>/context</td>
+              <td>See what is eating tokens (files, MCPs, tools)</td>
+            </tr>
+            <tr>
+              <td>/statusline</td>
+              <td>Show model, folder, context %, cost at a glance</td>
+            </tr>
+            <tr>
+              <td>/rewind</td>
+              <td>Undo a bad conversation branch or checkpoint</td>
+            </tr>
+            <tr>
+              <td>/resume</td>
+              <td>Continue a previous session</td>
+            </tr>
+            <tr>
+              <td>/memory</td>
+              <td>Review / update cross-project preferences</td>
+            </tr>
+            <tr>
+              <td>/insights</td>
+              <td>Audit usage patterns — find skill/rule candidates</td>
+            </tr>
+            <tr>
+              <td>/help</td>
+              <td>List all available commands</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- CODE QUALITY -->
+      <div class="card">
+        <div class="card-head head-green">&#9670; Code quality</div>
+        <div class="card-body">
+          <table>
+            <tr>
+              <td>/plan</td>
+              <td>Plan before multi-file changes — review scope first</td>
+            </tr>
+            <tr>
+              <td>/diff</td>
+              <td>Review the current working diff</td>
+            </tr>
+            <tr>
+              <td>/code-review</td>
+              <td>
+                Review diff — add <code>low/medium/high/ultra</code> for depth
+              </td>
+            </tr>
+            <tr>
+              <td>/code-review high --fix</td>
+              <td>Review and auto-apply fixes in one step</td>
+            </tr>
+            <tr>
+              <td>/code-review ultra</td>
+              <td>Deep multi-agent cloud review (billed, user-triggered)</td>
+            </tr>
+            <tr>
+              <td>/security-review</td>
+              <td>Audit secrets, auth, deps, SQL/XSS, RLS, config</td>
+            </tr>
+            <tr>
+              <td>/run</td>
+              <td>Start the app and observe runtime behavior</td>
+            </tr>
+            <tr>
+              <td>/verify</td>
+              <td>Browser-verify affected routes, UI, console, interactions</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- TOOLS & SCALE -->
+      <div class="card">
+        <div class="card-head head-violet">&#9670; Tools &amp; scale</div>
+        <div class="card-body">
+          <table>
+            <tr>
+              <td>/plugin</td>
+              <td>Open plugin marketplace — browse and install plugins</td>
+            </tr>
+            <tr>
+              <td>/plugin install &lt;name&gt;</td>
+              <td>Install a specific plugin</td>
+            </tr>
+            <tr>
+              <td>/skills</td>
+              <td>List and manage project skills</td>
+            </tr>
+            <tr>
+              <td>/agents</td>
+              <td>Manage subagents for parallel isolated work</td>
+            </tr>
+            <tr>
+              <td>/hooks</td>
+              <td>Configure event-driven automation (format, guard, log)</td>
+            </tr>
+            <tr>
+              <td>/permissions</td>
+              <td>Set what Claude can do without prompting you</td>
+            </tr>
+            <tr>
+              <td>/model</td>
+              <td>Switch model (Opus / Sonnet / Haiku)</td>
+            </tr>
+            <tr>
+              <td>/goal</td>
+              <td>Depth loop — keep trying until done criteria are met</td>
+            </tr>
+            <tr>
+              <td>/loop [interval]</td>
+              <td>Repeat a command on a schedule</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+       ROW 2: OpenSpec commands  |  Context hygiene
+  ============================================================= -->
+    <section class="grid-2">
+      <!-- OPENSPEC COMMANDS -->
+      <div class="card col-span-1">
+        <div class="card-head head-orange">&#9670; OpenSpec commands</div>
+        <div class="card-body">
+          <table>
+            <tr>
+              <td>openspec init</td>
+              <td>
+                Initialize OpenSpec in the repo — run once after project setup
+              </td>
+            </tr>
+            <tr>
+              <td>openspec list</td>
+              <td>List all active changes and their status</td>
+            </tr>
+            <tr>
+              <td>openspec validate</td>
+              <td>Validate all artifacts before archiving</td>
+            </tr>
+            <tr>
+              <td>/opsx:explore [topic]</td>
+              <td>
+                <span class="badge badge-cyan">think</span> Explore an unclear
+                idea — options, risks, no code edits
+              </td>
+            </tr>
+            <tr>
+              <td>/opsx:propose &lt;name&gt;</td>
+              <td>
+                <span class="badge badge-blue">plan</span> Create
+                <code>proposal.md</code>, <code>design.md</code>,
+                <code>tasks.md</code>, spec deltas &mdash; all in one step
+              </td>
+            </tr>
+            <tr>
+              <td>/opsx:new</td>
+              <td>
+                <span class="badge badge-blue">plan</span> Start a change and
+                build its artifacts <em>incrementally</em> (alt. to propose)
+              </td>
+            </tr>
+            <tr>
+              <td>/opsx:continue [name]</td>
+              <td>
+                <span class="badge badge-blue">plan</span> Create the next
+                artifact for an in-progress change
+              </td>
+            </tr>
+            <tr>
+              <td>/opsx:apply [name]</td>
+              <td>
+                <span class="badge badge-green">build</span> Implement the
+                approved change task-by-task
+              </td>
+            </tr>
+            <tr>
+              <td>/opsx:verify [name]</td>
+              <td>
+                <span class="badge badge-violet">check</span> Confirm
+                implementation matches the change&rsquo;s artifacts (before
+                archive)
+              </td>
+            </tr>
+            <tr>
+              <td>/opsx:sync [name]</td>
+              <td>
+                <span class="badge badge-orange">promote</span> Push a
+                change&rsquo;s delta specs into the main specs (without
+                archiving)
+              </td>
+            </tr>
+            <tr>
+              <td>/opsx:archive [name]</td>
+              <td>
+                <span class="badge badge-green">done</span> Sync to main specs
+                and close the change
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- CONTEXT HYGIENE + QUICK RULES -->
+      <div style="display: flex; flex-direction: column; gap: 16px">
+        <div class="card">
+          <div class="card-head head-cyan">&#9670; Context hygiene</div>
+          <div class="card-body">
+            <div class="meter-wrap">
+              <div class="meter">
+                <div class="meter-seg seg-green">0–20%</div>
+                <div class="meter-seg seg-yellow">40%</div>
+                <div class="meter-seg seg-orange">/compact</div>
+                <div class="meter-seg seg-red">/clear</div>
+              </div>
+              <div class="meter-labels">
+                <span>healthy</span>
+                <span>watch</span>
+                <span>compress</span>
+                <span>reset</span>
+              </div>
+            </div>
+            <table style="margin-top: 8px">
+              <tr>
+                <td>/compact</td>
+                <td>
+                  Keep: decisions, files changed, tests run, blockers. Drop:
+                  chatter, noise
+                </td>
+              </tr>
+              <tr>
+                <td>/clear</td>
+                <td>Use between unrelated tasks — start fresh</td>
+              </tr>
+              <tr>
+                <td>/context</td>
+                <td>Find what is filling the window before it degrades</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head head-red">&#9670; Safety rules</div>
+          <div class="card-body">
+            <div class="rule-row">
+              <span class="rule-icon">&#10003;</span>
+              <div>
+                <strong>Allow:</strong> file reads, git status/diff/log, tests,
+                lint, local dev server
+              </div>
+            </div>
+            <div class="rule-row">
+              <span class="rule-icon">&#9888;</span>
+              <div>
+                <strong>Ask first:</strong> package installs, file deletes,
+                migrations, deployments, network calls
+              </div>
+            </div>
+            <div class="rule-row">
+              <span class="rule-icon">&#10007;</span>
+              <div>
+                <strong>Never:</strong> read/print <code>.env</code> values,
+                commit secrets, skip hooks with <code>--no-verify</code>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+       ROW 3: COMBINED FLOW
+  ============================================================= -->
+    <section>
+      <div class="card">
+        <div class="card-head head-ink">
+          &#9670; Full flow — large / architectural change (the maximum; smaller
+          changes use a subset &mdash; see &ldquo;Right-size by volume&rdquo;)
+        </div>
+        <div class="card-body" style="padding-top: 12px; padding-bottom: 12px">
+          <div class="flow">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-title">Explore</div>
+              <div class="step-cmd">/opsx:explore</div>
+              <div class="step-note">
+                Unclear task? Think before committing. No edits. Get options +
+                risks.
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-title">Propose</div>
+              <div class="step-cmd">/opsx:propose &lt;name&gt;</div>
+              <div class="step-note">
+                Creates <code>proposal.md</code>, <code>design.md</code>,
+                <code>tasks.md</code>, spec deltas. No code yet.
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-title">Review</div>
+              <div class="step-cmd">(human)</div>
+              <div class="step-note">
+                Check scope, non-goals, acceptance scenarios, and task list
+                before approving.
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-num">4</div>
+              <div class="step-title">Apply</div>
+              <div class="step-cmd">/opsx:apply [name]</div>
+              <div class="step-note">
+                Implement task by task. Update <code>tasks.md</code> as you go.
+                Keep diffs small.
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-num">5</div>
+              <div class="step-title">Run &amp; Verify</div>
+              <div class="step-cmd">/run &nbsp; /verify</div>
+              <div class="step-note">
+                Build, start app, check affected routes, mobile + desktop,
+                browser console.
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-num">6</div>
+              <div class="step-title">Code Review</div>
+              <div class="step-cmd">/code-review high --fix</div>
+              <div class="step-note">
+                Bugs, over-engineering, missing tests, cleanup. Auto-fix what
+                you can.
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-num">7</div>
+              <div class="step-title">Spec Verify</div>
+              <div class="step-cmd">/opsx:verify [name]</div>
+              <div class="step-note">
+                Does the code match what the proposal and spec described? Close
+                the loop.
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-num">8</div>
+              <div class="step-title">Archive</div>
+              <div class="step-cmd">/opsx:archive [name]</div>
+              <div class="step-note">
+                Sync to main specs, close the change. Commit code + artifacts
+                together.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+       ROW 3.5: RIGHT-SIZE BY CHANGE VOLUME
+  ============================================================= -->
+    <section>
+      <div class="card">
+        <div class="card-head head-cyan">
+          &#9670; Right-size by volume — match effort to the size of the change
+        </div>
+        <div class="card-body">
+          <table class="tier-table">
+            <thead>
+              <tr>
+                <th style="width: 9%">Size</th>
+                <th style="width: 26%">How to spot it</th>
+                <th style="width: 30%">Recommended flow</th>
+                <th style="width: 19%">Enough &#10003;</th>
+                <th style="width: 16%">Overkill &#10007;</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="badge badge-green">Tiny</span></td>
+                <td>
+                  1 file &middot; a few lines &middot; copy, color, spacing, a
+                  single value &middot; no new behavior, no new component.
+                </td>
+                <td class="tier-flow">
+                  edit &rarr; <code>npm run build</code>
+                </td>
+                <td>
+                  <span class="ok">Build / lint green</span>; eyeball it if
+                  visual.
+                </td>
+                <td>
+                  <span class="no"
+                    >OpenSpec &middot; /verify &middot; /code-review</span
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-cyan">Small</span></td>
+                <td>
+                  1 component or 1 logic file &middot; self-contained tweak
+                  &middot; no new route / dependency &middot; fits in one
+                  sentence.
+                </td>
+                <td class="tier-flow">
+                  <code>/plan</code> (if unsure) &rarr; edit &rarr;
+                  <code>npm run dev</code> glance
+                </td>
+                <td>
+                  <span class="ok">Quick browser look</span>;
+                  <code>npm run test</code> if it&rsquo;s logic.
+                </td>
+                <td>
+                  <span class="no"
+                    >propose&rarr;archive cycle &middot; deep /verify &middot;
+                    /opsx:verify</span
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-orange">Medium</span></td>
+                <td>
+                  2&ndash;8 files &middot; new user-visible behavior &middot;
+                  touches shared layout &middot; new tests likely.
+                  <em>(motion, SEO/meta, dark mode, gallery lightbox)</em>
+                </td>
+                <td class="tier-flow">
+                  /opsx:propose &rarr; review &rarr; /opsx:apply &rarr;
+                  <strong>one</strong> runtime check &rarr; /codex:review &rarr;
+                  /opsx:archive
+                </td>
+                <td>
+                  <span class="ok">ONE runtime proof</span> &mdash; /verify
+                  <em>or</em> e2e, not both.
+                </td>
+                <td>
+                  <span class="no"
+                    >/run + /verify both &middot; e2e + deep /verify &middot;
+                    /code-review ultra</span
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-red">Large</span></td>
+                <td>
+                  Cross-cutting / architectural &middot; new dependency,
+                  backend, data model, or auth/security &middot; many files
+                  &middot; needs a paragraph to explain.
+                </td>
+                <td class="tier-flow">
+                  the full 8-step flow above &mdash; explore &rarr; archive
+                </td>
+                <td>
+                  <span class="ok">Full triangle</span> (runtime + diff + spec)
+                  &middot; + /security-review if auth/data.
+                </td>
+                <td>
+                  <span class="no">&mdash; this tier earns the ceremony</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+       ROW 3.6: VOLUME ESTIMATOR  |  OVERKILL WATCH
+  ============================================================= -->
+    <section class="grid-2">
+      <!-- ESTIMATOR -->
+      <div class="card">
+        <div class="card-head head-blue">
+          &#9670; Estimate the volume in 10 seconds
+        </div>
+        <div class="card-body">
+          <table>
+            <tr>
+              <td>Files touched</td>
+              <td>
+                1 &rarr; Tiny/Small &middot; 2&ndash;8 &rarr; Medium &middot; 8+
+                or new subsystem &rarr; Large
+              </td>
+            </tr>
+            <tr>
+              <td>User-visible?</td>
+              <td>
+                Nothing new to see/click &rarr; Tiny &middot; new behavior
+                &rarr; Medium+
+              </td>
+            </tr>
+            <tr>
+              <td>New dep / backend / schema / auth?</td>
+              <td>
+                Any &ldquo;yes&rdquo; &rarr; <strong>Large + OpenSpec</strong>,
+                always
+              </td>
+            </tr>
+            <tr>
+              <td>Explain it in&hellip;</td>
+              <td>
+                one sentence &rarr; Small &middot; a paragraph &rarr; Medium+
+              </td>
+            </tr>
+            <tr>
+              <td>Unsure?</td>
+              <td>
+                Size <strong>up</strong> one tier &mdash; under-verifying costs
+                more than the extra step.
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- OVERKILL WATCH -->
+      <div class="card">
+        <div class="card-head head-red">
+          &#9670; Overkill watch — stop doing these
+        </div>
+        <div class="card-body">
+          <div class="rule-row">
+            <span class="rule-icon">&#10007;</span>
+            <div>
+              <code>/run</code> is already inside <code>/verify</code> &mdash;
+              use one, not both.
+            </div>
+          </div>
+          <div class="rule-row">
+            <span class="rule-icon">&#10007;</span>
+            <div>
+              e2e tests <strong>and</strong> a deep <code>/verify</code> prove
+              the same thing &mdash; pick one.
+            </div>
+          </div>
+          <div class="rule-row">
+            <span class="rule-icon">&#10007;</span>
+            <div>
+              <code>/verify</code>, <code>/code-review</code>,
+              <code>/opsx:verify</code> are three lenses (runtime / code / spec)
+              &mdash; a small change needs at most one.
+            </div>
+          </div>
+          <div class="rule-row">
+            <span class="rule-icon">&#10007;</span>
+            <div>
+              OpenSpec on a typo or throwaway experiment &mdash; skip it.
+            </div>
+          </div>
+          <div class="rule-row">
+            <span class="rule-icon">&#10007;</span>
+            <div>
+              <code>/code-review ultra</code> is billed &amp; deep &mdash; save
+              it for Large changes or pre-release.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+       ROW 3.7: CODEX DELEGATION
+  ============================================================= -->
+    <section class="grid-2">
+      <div class="card" style="grid-column: 1 / -1">
+        <div class="card-head head-blue">
+          &#9670; Codex delegation — use OpenAI tokens instead of Claude tokens
+        </div>
+        <div class="card-body">
+          <p style="margin: 0 0 10px">
+            Plugin: <code>codex@openai-codex</code> &mdash; requires
+            <code>codex login</code> once. Codex reads
+            <code>AGENTS.md</code> (which points to <code>CLAUDE.md</code>) for
+            project context.
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 22%">Command</th>
+                <th style="width: 40%">When to use</th>
+                <th style="width: 38%">Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>/codex:review</code></td>
+                <td>
+                  After applying a Medium change &mdash; replaces
+                  <code>/code-review high</code>. Give one line of context.
+                </td>
+                <td>
+                  <code>/codex:review</code> &mdash; added SEO meta tags to 5
+                  pages, no backend changes
+                </td>
+              </tr>
+              <tr>
+                <td><code>/codex:adversarial-review</code></td>
+                <td>
+                  Before archiving any Large change. Challenges design choices
+                  and attack surfaces.
+                </td>
+                <td>
+                  <code>/codex:adversarial-review</code> focus on Supabase RLS
+                  and form validation
+                </td>
+              </tr>
+              <tr>
+                <td><code>/codex:rescue &lt;task&gt;</code></td>
+                <td>
+                  Bounded mechanical tasks: fix a bug, write tests, multi-file
+                  refactor, lint/TS errors.
+                </td>
+                <td>
+                  <code
+                    >/codex:rescue fix the failing smoke test in
+                    e2e/smoke.spec.ts</code
+                  >
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table style="margin-top: 10px">
+            <tr>
+              <td style="width: 50%; vertical-align: top; padding-right: 16px">
+                <strong>&#10003; Good for Codex</strong><br />
+                Bug fixes &middot; writing unit tests &middot; mechanical
+                multi-file work &middot; TypeScript / lint errors &middot;
+                repetitive refactors
+              </td>
+              <td style="width: 50%; vertical-align: top">
+                <strong>&#10007; Keep in Claude</strong><br />
+                OpenSpec proposals &middot; design / architecture decisions
+                &middot; UI direction &middot; anything needing the WHY &middot;
+                recovery when Codex fails
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+       ROW 4: Bug fix flow  |  When to use OpenSpec  |  Decision
+  ============================================================= -->
+    <section class="grid">
+      <!-- BUG FIX FLOW -->
+      <div class="card">
+        <div class="card-head head-red">&#9670; Bug fix flow</div>
+        <div class="card-body">
+          <table>
+            <tr>
+              <td>1.</td>
+              <td>Paste error, log, screenshot, or failing test</td>
+            </tr>
+            <tr>
+              <td>2.</td>
+              <td>Reproduce or explain how to reproduce</td>
+            </tr>
+            <tr>
+              <td>3.</td>
+              <td>Find root cause — explore before editing</td>
+            </tr>
+            <tr>
+              <td>4.</td>
+              <td>Propose smallest safe fix</td>
+            </tr>
+            <tr>
+              <td>5.</td>
+              <td>Add or update a regression test</td>
+            </tr>
+            <tr>
+              <td>6.</td>
+              <td>Implement</td>
+            </tr>
+            <tr>
+              <td>7.</td>
+              <td>
+                Run targeted tests + <code>lint</code> + <code>build</code>
+              </td>
+            </tr>
+            <tr>
+              <td>8. /diff</td>
+              <td>Confirm only what was intended changed</td>
+            </tr>
+          </table>
+          <p style="margin-top: 8px; font-size: 11px; color: var(--muted)">
+            Do not refactor unrelated code during a bug fix.
+          </p>
+        </div>
+      </div>
+
+      <!-- WHEN TO USE OPENSPEC -->
+      <div class="card">
+        <div class="card-head head-orange">&#9670; When to use OpenSpec</div>
+        <div class="card-body">
+          <div class="rule-row">
+            <span class="rule-icon">&#10003;</span>
+            <div>New feature or changed user-visible behavior</div>
+          </div>
+          <div class="rule-row">
+            <span class="rule-icon">&#10003;</span>
+            <div>API, data model, auth, or security changes</div>
+          </div>
+          <div class="rule-row">
+            <span class="rule-icon">&#10003;</span>
+            <div>Cross-cutting refactor affecting multiple files</div>
+          </div>
+          <div class="rule-row">
+            <span class="rule-icon">&#10003;</span>
+            <div>Anything you will want to understand 6 months later</div>
+          </div>
+          <div
+            style="
+              border-top: 1px solid var(--line);
+              margin-top: 8px;
+              padding-top: 8px;
+            "
+          >
+            <div class="rule-row">
+              <span class="rule-icon">&#8212;</span>
+              <div>Typos and trivial text changes — skip OpenSpec</div>
+            </div>
+            <div class="rule-row">
+              <span class="rule-icon">&#8212;</span>
+              <div>Small obvious bug fixes with narrow scope</div>
+            </div>
+            <div class="rule-row">
+              <span class="rule-icon">&#8212;</span>
+              <div>Throwaway experiments</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DECISION: WHICH TOOL -->
+      <div class="card">
+        <div class="card-head head-violet">&#9670; Which tool for what</div>
+        <div class="card-body">
+          <table>
+            <tr>
+              <td><span class="badge badge-blue">Prompt</span></td>
+              <td>Quick questions, small single-file edits, explanations</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-green">Skill</span></td>
+              <td>
+                Repeated workflows: review, test gen, PR description, UI polish
+              </td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-violet">Subagent</span></td>
+              <td>
+                Parallel isolated investigation — agents report back, do not
+                coordinate
+              </td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-orange">Worktree</span></td>
+              <td>
+                Parallel coding without file conflicts —
+                <code>claude --worktree &lt;branch&gt;</code>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-cyan">Context7</span></td>
+              <td>
+                Fresh library / framework docs — use before coding with any
+                external API
+              </td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-red">/goal</span></td>
+              <td>
+                Depth loop — keep retrying until tests pass or metric is met
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+       ROW 5: Verification triangle + quick prompts
+  ============================================================= -->
+    <section class="grid-2">
+      <!-- VERIFICATION -->
+      <div class="card">
+        <div class="card-head head-green">
+          &#9670; Verification — three separate checks
+        </div>
+        <div class="card-body">
+          <table>
+            <tr>
+              <td>/run &amp; /verify</td>
+              <td>
+                <span class="badge badge-green">runtime</span> Does the app work
+                in a real browser? Routes, nav, mobile, console.
+              </td>
+            </tr>
+            <tr>
+              <td>/code-review</td>
+              <td>
+                <span class="badge badge-blue">diff</span> Is the code correct?
+                Bugs, over-engineering, missing tests.
+              </td>
+            </tr>
+            <tr>
+              <td>/opsx:verify</td>
+              <td>
+                <span class="badge badge-violet">spec</span> Does the
+                implementation match what was proposed and agreed?
+              </td>
+            </tr>
+          </table>
+          <p style="margin-top: 8px; font-size: 11px; color: var(--muted)">
+            A passing build alone is not enough — routing, mobile behavior, and
+            fallback states are invisible to <code>npm run build</code>.
+          </p>
+        </div>
+      </div>
+
+      <!-- QUICK PROMPTS -->
+      <div class="card">
+        <div class="card-head head-ink">&#9670; Copy-paste starters</div>
+        <div class="card-body">
+          <table>
+            <tr>
+              <td
+                style="
+                  white-space: normal;
+                  font-family: var(--mono);
+                  font-size: 10px;
+                  color: var(--muted);
+                "
+              >
+                Explore unclear task
+              </td>
+              <td style="font-size: 11px">
+                <code>/opsx:explore</code> — describe task, say what is unclear,
+                ask for options + risks before any code
+              </td>
+            </tr>
+            <tr>
+              <td
+                style="
+                  white-space: normal;
+                  font-family: var(--mono);
+                  font-size: 10px;
+                  color: var(--muted);
+                "
+              >
+                Start a feature
+              </td>
+              <td style="font-size: 11px">
+                <code>/opsx:propose &lt;name&gt;</code> — describe goal, scope,
+                non-goals, and how you will verify
+              </td>
+            </tr>
+            <tr>
+              <td
+                style="
+                  white-space: normal;
+                  font-family: var(--mono);
+                  font-size: 10px;
+                  color: var(--muted);
+                "
+              >
+                Ask what to ask
+              </td>
+              <td style="font-size: 11px">
+                "I am starting [task]. Interview me until you understand goal,
+                constraints, risks, and done criteria."
+              </td>
+            </tr>
+            <tr>
+              <td
+                style="
+                  white-space: normal;
+                  font-family: var(--mono);
+                  font-size: 10px;
+                  color: var(--muted);
+                "
+              >
+                Adversarial review
+              </td>
+              <td style="font-size: 11px">
+                "Be adversarial — assume this is wrong and try to prove it
+                fails. Focus on edge cases, hidden coupling, security."
+              </td>
+            </tr>
+            <tr>
+              <td
+                style="
+                  white-space: normal;
+                  font-family: var(--mono);
+                  font-size: 10px;
+                  color: var(--muted);
+                "
+              >
+                Fresh docs
+              </td>
+              <td style="font-size: 11px">
+                "Before coding, fetch current docs for [library] via Context7 —
+                do not rely on memory."
+              </td>
+            </tr>
+            <tr>
+              <td
+                style="
+                  white-space: normal;
+                  font-family: var(--mono);
+                  font-size: 10px;
+                  color: var(--muted);
+                "
+              >
+                Process upgrade
+              </td>
+              <td style="font-size: 11px">
+                "Based on this session, suggest one improvement to CLAUDE.md, a
+                skill, a hook, or a reference file."
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
