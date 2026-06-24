@@ -1,7 +1,6 @@
 # Project memory - Martin Yordanov portfolio
 
-This repo was created from the Nikoleta Kaito starter-kit structure on
-2026-06-14 as a separate project for Martin Yordanov.
+This repo was created on 2026-06-14 as a separate project for Martin Yordanov.
 
 ## Current State
 
@@ -10,7 +9,8 @@ This repo was created from the Nikoleta Kaito starter-kit structure on
 - Supplied source material: one uploaded archive with images for two projects:
   kinetic sand table and wall plotter.
 - Live browser assets are in `public/martin/`.
-- Original uploaded files are preserved in `client-source/portfolio-upload/`.
+- Original uploaded files are preserved in `client-source/portfolio-upload/`
+  when present in the local checkout.
 
 ## Content Rules
 

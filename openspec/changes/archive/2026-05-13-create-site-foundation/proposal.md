@@ -1,6 +1,6 @@
 ## Why
 
-Nikoleta Kaito needs a professional online presence to showcase her work as a Latin dancer and to make it easy for organizers to discover and book her. We are starting from an empty Vite + React + TypeScript project and need to establish the foundation (routing, layout, navigation, placeholder content) before any real content or integrations are added.
+Martin Yordanov needs a professional online presence to showcase his kinetic furniture and drawing-machine work and to make it easy for collaborators to contact him. We are starting from an empty Vite + React + TypeScript project and need to establish the foundation (routing, layout, navigation, placeholder content) before any real content or integrations are added.
 
 ## What Changes
 
@@ -11,7 +11,7 @@ Nikoleta Kaito needs a professional online presence to showcase her work as a La
 - Add placeholder pages for the remaining routes, each scaffolded with section headings and short placeholder copy.
 - Introduce a typed local content layer (TypeScript files under `src/content/`) so future real content drops in without code changes.
 - Add `public/_redirects` so SPA hosting (e.g. Netlify-style) falls back to `index.html` for client-side routes.
-- Use only placeholder copy — do not invent awards, festivals, or collaborations attributed to Nikoleta Kaito.
+- Use only placeholder copy — do not invent awards, festivals, or collaborations attributed to Martin Yordanov.
 
 ## Capabilities
 

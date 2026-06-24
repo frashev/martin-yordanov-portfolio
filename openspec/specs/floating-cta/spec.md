@@ -15,7 +15,7 @@ Contact route.
 #### Scenario: CTA appears after scroll depth
 
 - **WHEN** a visitor opens a non-Contact route and scrolls at least 300px
-- **THEN** a fixed "Book Nikoleta" link becomes visible and keyboard-focusable
+- **THEN** a fixed link labelled with `profile.bookingCtaLabel` becomes visible and keyboard-focusable
 
 #### Scenario: CTA is hidden before scroll depth
 

@@ -18,7 +18,7 @@ Page content SHALL be sourced from typed TypeScript modules under `src/content/`
 
 ### Requirement: Content types are centralized
 
-Content-related TypeScript types (`Profile`, `NavItem`, `Project`, `Workshop`, `EventItem`, `GalleryItem`, `Video`) SHALL be defined in a single location (`src/content/types.ts`) and imported by each content module. Page-content wrapper types (e.g. `HomeContent`, `AboutContent`, `ContactContent`, `ListPageContent<T>`) SHALL NOT exist in the type module; pages render headings and intro copy inline.
+Content-related TypeScript types (`Profile`, `NavItem`, `Project`, `ProcessStep`, `GalleryItem`, `Video`, and related display types) SHALL be defined in a single location (`src/content/types.ts`) and imported by each content module. Page-content wrapper types (e.g. `HomeContent`, `ContactContent`, `ListPageContent<T>`) SHALL NOT exist in the type module; pages render headings and intro copy inline.
 
 #### Scenario: Types are imported, not redeclared
 
@@ -59,7 +59,7 @@ The primary navigation link list (path, label, and active-match behavior) SHALL 
 
 ### Requirement: Profile identity lives in a single content module
 
-Identity-related copy used across Home, About, and Contact (name, tagline, intro, bio paragraphs, booking CTA label, contact email, and contact intro) SHALL be sourced from a single typed module at `src/content/profile.ts`.
+Identity-related copy used across Home, Process, and Contact (name, tagline, intro, bio paragraphs, inquiry CTA label, contact email, and contact intro) SHALL be sourced from a single typed module at `src/content/profile.ts`.
 
 #### Scenario: Updating contact email is a single-file edit
 
@@ -75,7 +75,7 @@ Identity-related copy used across Home, About, and Contact (name, tagline, intro
 
 ### Requirement: Media items live in a single content module
 
-Gallery items and videos SHALL be sourced from a single typed module at `src/content/media.ts`, exporting `gallery` and `videos` arrays.
+Gallery items and optional future videos SHALL be sourced from a single typed module at `src/content/media.ts`, exporting `gallery`, `videos`, and `performanceReel`.
 
 #### Scenario: Adding a gallery item is a single-file edit
 
@@ -83,15 +83,15 @@ Gallery items and videos SHALL be sourced from a single typed module at `src/con
 - **THEN** the Gallery page renders the additional item
 - **AND** no edit to `Gallery.tsx` is required
 
-#### Scenario: Adding a video is a single-file edit
+#### Scenario: Future video data remains content-scoped
 
 - **WHEN** a maintainer appends a new entry to the `videos` array in `src/content/media.ts`
-- **THEN** the Videos page renders the additional item
-- **AND** no edit to `Videos.tsx` is required
+- **THEN** the video data remains typed and available for a future page or component
+- **AND** no existing Martin route is required to render it immediately
 
 ### Requirement: Domain lists export plain typed arrays
 
-The content modules for Projects, Workshops, and Events SHALL each export a single typed array of items (e.g. `projects: Project[]`), without wrapping them in a per-page content object.
+The project content module SHALL export plain typed arrays for portfolio projects and process steps, without wrapping them in a per-page content object.
 
 #### Scenario: Adding a project is a single-file edit
 

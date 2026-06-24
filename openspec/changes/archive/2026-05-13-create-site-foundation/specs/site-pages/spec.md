@@ -12,12 +12,12 @@ The application SHALL provide a dedicated page component for each V1 route: Home
 
 ### Requirement: Home page hero and booking CTA
 
-The Home page SHALL include a Hero section with a name/title heading, a short tagline, and a primary call-to-action button labeled with booking intent (e.g. "Book Nikoleta"). The CTA SHALL link to the Contact page.
+The Home page SHALL include a Hero section with a name/title heading, a short tagline, and a primary call-to-action button labeled with booking intent (e.g. "Discuss a project"). The CTA SHALL link to the Contact page.
 
 #### Scenario: Hero renders on Home
 
 - **WHEN** the user is on `/`
-- **THEN** a Hero section is visible with Nikoleta Kaito's name, a tagline, and a primary CTA button
+- **THEN** a Hero section is visible with Martin Yordanov's name, a tagline, and a primary CTA button
 
 #### Scenario: Booking CTA links to Contact
 
@@ -26,13 +26,13 @@ The Home page SHALL include a Hero section with a name/title heading, a short ta
 
 ### Requirement: Placeholder-only content
 
-Page components SHALL display only placeholder copy. They SHALL NOT include fabricated awards, festivals, venues, partner names, dates, or biographical claims attributed to Nikoleta Kaito.
+Page components SHALL display only placeholder copy. They SHALL NOT include fabricated awards, festivals, venues, partner names, dates, or biographical claims attributed to Martin Yordanov.
 
 #### Scenario: No fabricated claims in V1 content
 
 - **WHEN** any V1 page is rendered
 - **THEN** all content originates from placeholder strings clearly marked as such
-- **AND** no specific real-world achievement, award, festival, or collaboration is asserted about Nikoleta Kaito
+- **AND** no specific real-world achievement, award, festival, or collaboration is asserted about Martin Yordanov
 
 ### Requirement: Contact page exposes a placeholder contact path
 

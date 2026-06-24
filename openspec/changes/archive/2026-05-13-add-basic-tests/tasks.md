@@ -19,7 +19,7 @@
 ## 4. Playwright setup
 
 - [x] 4.1 Create `playwright.config.ts` with `testDir: "e2e"`, chromium-only `projects`, and a `webServer` running `npm run dev` on `http://localhost:5173` with `reuseExistingServer: !process.env.CI`
-- [x] 4.2 Create `e2e/smoke.spec.ts`: navigate to `/`, assert the `Nikoleta Kaito` heading + CTA label from `profile`, click "Projects" in the header, assert the Projects heading, click "Contact", assert the Contact heading + `profile.contactEmail`
+- [x] 4.2 Create `e2e/smoke.spec.ts`: navigate to `/`, assert the `Martin Yordanov` heading + CTA label from `profile`, click "Projects" in the header, assert the Projects heading, click "Contact", assert the Contact heading + `profile.contactEmail`
 - [x] 4.3 Update `.gitignore` to ignore `/playwright-report/` and `/test-results/`
 
 ## 5. npm scripts

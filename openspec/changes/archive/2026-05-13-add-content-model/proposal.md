@@ -14,7 +14,7 @@ This change consolidates and renames the content layer to match the requested st
 - Update `Home`, `About`, `Contact`, `Gallery`, `Videos`, `Projects`, `Workshops`, `Events`, and `Header` to import from the new modules.
 - Update `src/content/types.ts`: add `Profile`, `NavItem`, `MediaItem`, `Video`; remove now-unused `HomeContent`, `AboutContent`, `ContactContent`, `ListPageContent`.
 - **BREAKING** (internal only — no external API): `src/content/home.ts`, `src/content/about.ts`, `src/content/contact.ts`, `src/content/gallery.ts`, `src/content/videos.ts` are removed.
-- No fabricated facts about Nikoleta Kaito — all values remain explicitly placeholder.
+- No fabricated facts about Martin Yordanov — all values remain explicitly placeholder.
 
 ## Capabilities
 

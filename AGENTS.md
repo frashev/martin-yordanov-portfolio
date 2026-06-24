@@ -9,8 +9,9 @@ look. (`AGENTS.md` is the converging cross-tool standard; it plays the same role
 ## What this is
 
 A **React 19 + React Router 7 + Tailwind CSS v4 + TypeScript** site, built with Vite and
-deployed to Cloudflare Workers. It's a portfolio/marketing site for a dancer, and it
-doubles as a **reusable, spec-driven kit** for similar event/marketing sites.
+deployed to Cloudflare Workers. It's a portfolio/marketing site for Martin Yordanov's
+kinetic furniture, drawing machines, and functional art objects, and it doubles as a
+**reusable, spec-driven kit** for similar portfolio/marketing sites.
 
 ## Read in this order
 

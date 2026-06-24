@@ -75,7 +75,7 @@ The new behaviour is small, self-contained, and touches only the shared layout a
 
 **Why:**
 
-- The page's "real" h1 is the form heading ("Send Nikoleta a message"). The success state is a sub-state of the same page, not a new page.
+- The page's "real" h1 is the form heading ("Send Martin a message"). The success state is a sub-state of the same page, not a new page.
 - An h2 is the right level — the success heading sits _under_ the page-level h1 conceptually.
 - Aria-live (`role="status"`) is already on the success container from the accessibility-pass change, so screen readers still announce it.
 

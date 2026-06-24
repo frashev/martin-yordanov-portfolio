@@ -7,7 +7,7 @@ The site has shipped routing, content, and a theme pass, but there is currently 
 - Add Vitest + React Testing Library + jsdom as dev dependencies; configure Vitest via `vite.config.ts` (`test` block) and a `src/test/setup.ts` that wires `@testing-library/jest-dom`.
 - Add component tests under `src/__tests__/`:
   - `Header.test.tsx` — renders all primary nav links and toggles the mobile menu.
-  - `Home.test.tsx` — renders the name, tagline, and a "Book Nikoleta" CTA pointing to `/contact`; renders a secondary link to `/about`.
+  - `Home.test.tsx` — renders the name, tagline, and a "Discuss a project" CTA pointing to `/contact`; renders a secondary link to `/about`.
   - `Projects.test.tsx` — renders one card per item in `projects` content.
 - Add Playwright as a dev dependency, with a `playwright.config.ts` that starts the Vite dev server via `webServer`. One spec file `e2e/smoke.spec.ts` opens `/`, navigates to Projects and Contact via the header, and asserts on the page heading and the Hero booking CTA.
 - Add npm scripts:

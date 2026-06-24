@@ -19,12 +19,12 @@ The project SHALL produce its deployable static site via `npm run build`, emitti
 
 ### Requirement: Deployment is via Cloudflare Workers static assets
 
-The site SHALL be deployed as a Cloudflare Workers static-asset Worker configured in `wrangler.toml`. The Worker name SHALL be `nikoleta-kaito`, the assets directory SHALL be `./dist`, and `not_found_handling` SHALL be set to `single-page-application` so all unmatched paths serve `index.html`.
+The site SHALL be deployed as a Cloudflare Workers static-asset Worker configured in `wrangler.toml`. The Worker name SHALL be `martin-yordanov-portfolio`, the assets directory SHALL be `./dist`, and `not_found_handling` SHALL be set to `single-page-application` so all unmatched paths serve `index.html`.
 
 #### Scenario: wrangler.toml is present and correct
 
 - **WHEN** a developer opens `wrangler.toml`
-- **THEN** the file specifies `name = "nikoleta-kaito"`, `directory = "./dist"`, and `not_found_handling = "single-page-application"`
+- **THEN** the file specifies `name = "martin-yordanov-portfolio"`, `directory = "./dist"`, and `not_found_handling = "single-page-application"`
 
 #### Scenario: Deploy command succeeds
 

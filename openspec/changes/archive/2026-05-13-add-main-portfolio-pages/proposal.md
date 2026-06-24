@@ -2,7 +2,7 @@
 
 The pages exist and the content model is in place, but the current look is a stark neutral/rose Tailwind sketch — it does not yet feel "elegant, artistic, warm, and professional," and the booking call-to-action is buried on the Home hero alone. Visitors landing on About, Projects, Workshops, Events, Gallery, or Videos have no in-page nudge toward booking. The placeholder media slots (gallery tiles, video thumbnails) are also plain grey boxes that don't communicate "this is where a photo / video goes."
 
-This change is a visual and structural pass over the existing pages: introduce a warm artistic theme (palette, typography, spacing), turn each domain page into a consistent card-based layout, add a recurring "Book Nikoleta" CTA strip near the bottom of every page, and replace the plain grey placeholders with branded placeholder slots that clearly show their intended media role.
+This change is a visual and structural pass over the existing pages: introduce a warm artistic theme (palette, typography, spacing), turn each domain page into a consistent card-based layout, add a recurring "Discuss a project" CTA strip near the bottom of every page, and replace the plain grey placeholders with branded placeholder slots that clearly show their intended media role.
 
 ## What Changes
 

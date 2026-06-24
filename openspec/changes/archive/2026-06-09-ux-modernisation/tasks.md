@@ -31,11 +31,11 @@ Progress key: `- [ ]` = todo · `- [x]` = done
 - [x] 1.3.1 Add `<link rel="preload" as="image" href="/hero-image.jpg">` to `index.html`
 - [x] 1.3.2 Add `<link rel="preconnect" href="https://[supabase-project].supabase.co">` to `index.html` (use the host from `VITE_SUPABASE_URL` — do not hardcode the secret value, derive the host from the env var comment or ask the owner)
 
-### 1.4 Floating booking CTA
+### 1.4 Floating inquiry CTA
 
 - [x] 1.4.1 Create `src/components/FloatingCTA.tsx` — fixed bottom-right button, hidden until scroll ≥ 300px, hidden on `/contact`
 - [x] 1.4.2 Add to `src/components/Layout.tsx` alongside the existing `<BookingCTA>`
-- [x] 1.4.3 Style: matches `--accent` token, accessible focus ring, `aria-label="Book Nikoleta"`
+- [x] 1.4.3 Style: matches `--accent` token, accessible focus ring, `aria-label="Discuss a project"`
 - [x] 1.4.4 Verify it doesn't overlap the cookie/toast area or overlap the main CTA on short pages
 
 ### 1.5 Bento grid on Gallery
@@ -69,8 +69,8 @@ Progress key: `- [ ]` = todo · `- [x]` = done
 ## Phase 3 — Built with example content (replace before launch)
 
 - [x] 3.1 **Video hero** — added placeholder `heroVideoSrc` in `src/content/profile.ts`, muted autoplay, poster image, and fallback image on video load failure
-- [x] 3.2 **Performance reel** — added placeholder featured reel on Videos page above the archive grid
-- [x] 3.3 **Calendly embed** — added inline placeholder booking embed on Contact page below the form
+- [x] 3.2 **Project video reel** — added placeholder featured reel on Videos page above the archive grid
+- [x] 3.3 **Calendly embed** — added inline placeholder scheduling embed on Contact page below the form
 - [x] 3.4 **Instagram feed** — added lazy-loaded static social feed grid to Home page; replace with a real provider once a verified Instagram URL exists
 
 ---

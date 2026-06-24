@@ -1,4 +1,4 @@
-# Visual style guide — Nikoleta Kaito
+# Visual style guide — Martin Yordanov
 
 Single source of truth for the site's visual identity. Read this before any UI work; keep it in sync when tokens change in [`src/index.css`](../../src/index.css). The vocabulary used here is explained by the `/design-vocab` skill.
 
@@ -69,7 +69,7 @@ Motion tokens live in `src/index.css` (`:root`) alongside the color tokens:
 
 - Keep durations in the **~200–400ms** range and always use `--ease-out`. Never overshoot/bounce.
 - Reusable pieces: the `.reveal` / `.entrance` utility classes, the `useReveal` hook (`src/lib/useReveal.ts`), and the `Reveal` wrapper (`src/components/Reveal.tsx`). Route cross-fades use React Router's `viewTransition` prop + the native View Transitions API (no library).
-- Motion remains enabled by default. Do not gate site motion behind `prefers-reduced-motion`; the dancer/choreographer brand should keep its sense of movement even when the OS reports reduced motion.
+- Motion remains enabled by default. Do not gate site motion behind `prefers-reduced-motion`; Martin's kinetic-object brand should keep its sense of movement even when the OS reports reduced motion.
 - Essential feedback (the contact-form spinner, focus rings) is **not** gated and must keep working.
 
 ## Contrast & accessibility

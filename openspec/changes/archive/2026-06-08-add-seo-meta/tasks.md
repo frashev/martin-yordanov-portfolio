@@ -2,7 +2,7 @@
 
 - [x] 1.1 Add `SeoMeta` type to `src/content/types.ts` (`title`, `description`, `ogImage?`)
 - [x] 1.2 Create `src/content/seo.ts` with placeholder SEO copy for all 8 routes (`/`, `/about`, `/projects`, `/workshops`, `/events`, `/gallery`, `/videos`, `/contact`) plus a shared `defaultOgImage` monogram data-URI
-- [x] 1.3 Update `index.html` base `<title>` from `nikoleta-kaito-website` to `Nikoleta Kaito`
+- [x] 1.3 Update `index.html` base `<title>` from `martin-yordanov-website` to `Martin Yordanov`
 
 ## 2. PageMeta Component
 

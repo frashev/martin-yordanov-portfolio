@@ -72,7 +72,7 @@ The Playwright suite SHALL include a smoke spec that visits `/`, navigates via t
 #### Scenario: Smoke spec covers Home, Projects, Contact
 
 - **WHEN** the smoke spec runs
-- **THEN** it loads `/` and asserts that the "Nikoleta Kaito" heading and the booking CTA labelled `profile.bookingCtaLabel` are visible
+- **THEN** it loads `/` and asserts that the "Martin Yordanov" heading and the booking CTA labelled `profile.bookingCtaLabel` are visible
 - **AND** it activates the Projects nav link and asserts that the Projects page heading is visible
 - **AND** it activates the Contact nav link and asserts that the Contact page heading and the placeholder email are visible
 

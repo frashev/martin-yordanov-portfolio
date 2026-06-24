@@ -20,7 +20,7 @@
 
 - [x] 4.1 Update `src/pages/Home.tsx` to a two-column Hero at `md+` (text left, decorative inline-SVG monogram or geometric mark right) and single column below `md`
 - [x] 4.2 Apply serif display heading to the name; warm accent to the tagline
-- [x] 4.3 Add a secondary text link "Read about Nikoleta" → `/about` next to the primary CTA
+- [x] 4.3 Add a secondary text link "Read about Martin" → `/about` next to the primary CTA
 
 ## 5. About page refresh
 

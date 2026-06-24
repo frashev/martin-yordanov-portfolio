@@ -27,5 +27,5 @@ The site has a complete content layer (`src/content/`) where all page copy lives
 
 ## Risks / Trade-offs
 
-- **Placeholder quotes look fake** → clearly marked `// PLACEHOLDER` in the data file; the README note in `types.ts` already warns against fabricating real claims. Quotes stay neutral and generic until Nikoleta provides real ones.
+- **Placeholder quotes look fake** → clearly marked `// PLACEHOLDER` in the data file; the README note in `types.ts` already warns against fabricating real claims. Quotes stay neutral and generic until Martin provides real ones.
 - **Long quotes break card rhythm** → `role` is capped visually; `quote` gets `line-clamp-4` on Home's compact view. Workshops shows the full quote.

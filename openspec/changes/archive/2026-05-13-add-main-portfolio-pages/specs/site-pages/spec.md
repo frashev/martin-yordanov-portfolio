@@ -43,7 +43,7 @@ The Home page SHALL include a Hero section with the name, a tagline, a short int
 #### Scenario: Hero renders on Home
 
 - **WHEN** the user is on `/`
-- **THEN** a Hero section is visible with Nikoleta Kaito's name, a tagline, a short intro, a primary CTA button, and a secondary link to `/about`
+- **THEN** a Hero section is visible with Martin Yordanov's name, a tagline, a short intro, a primary CTA button, and a secondary link to `/about`
 
 #### Scenario: Booking CTA links to Contact
 

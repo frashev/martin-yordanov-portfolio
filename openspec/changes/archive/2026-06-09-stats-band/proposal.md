@@ -1,6 +1,6 @@
 ## Why
 
-The site has no at-a-glance credibility signal — a visitor can't immediately grasp the scale of Nikoleta's experience without reading paragraphs of bio copy. A stats band (a horizontal row of key numbers) delivers that in one glance, directly supporting the booking decision.
+The site has no at-a-glance credibility signal — a visitor can't immediately grasp the scale of Martin's experience without reading paragraphs of bio copy. A stats band (a horizontal row of key numbers) delivers that in one glance, directly supporting the booking decision.
 
 ## What Changes
 

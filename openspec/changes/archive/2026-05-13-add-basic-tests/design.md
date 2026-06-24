@@ -43,7 +43,7 @@ The codebase is Vite + React + TypeScript with `react-router` v7 and Tailwind v4
 
 - `playwright.config.ts` uses `webServer: { command: "npm run dev", url: "http://localhost:5173", reuseExistingServer: !process.env.CI, timeout: 60_000 }`.
 - `testDir: "e2e"`. One browser (chromium) by default to keep the install footprint reasonable; user can extend later.
-- `e2e/smoke.spec.ts`: opens `/`, asserts the "Nikoleta Kaito" heading is visible, clicks the "Projects" nav link, asserts the Projects heading, clicks "Contact", asserts the contact-page heading and the placeholder email is visible.
+- `e2e/smoke.spec.ts`: opens `/`, asserts the "Martin Yordanov" heading is visible, clicks the "Projects" nav link, asserts the Projects heading, clicks "Contact", asserts the contact-page heading and the placeholder email is visible.
 - Browsers must be installed once via `npx playwright install chromium`. Document this in `tasks.md`.
 
 ### `npm` scripts
@@ -62,7 +62,7 @@ The codebase is Vite + React + TypeScript with `react-router` v7 and Tailwind v4
 
 ## Risks / Trade-offs
 
-- **Tests coupled to placeholder content might break when real copy lands** → Mitigation: assert on structural identifiers (route headings, CTA target paths, content array length) not placeholder strings. The CTA text comes from `profile.bookingCtaLabel`, so the test should read that field rather than hardcode "Book Nikoleta".
+- **Tests coupled to placeholder content might break when real copy lands** → Mitigation: assert on structural identifiers (route headings, CTA target paths, content array length) not placeholder strings. The CTA text comes from `profile.bookingCtaLabel`, so the test should read that field rather than hardcode "Discuss a project".
 - **Playwright pulls in a large browser download** → Acceptable: it is dev-only and one-time per machine. `tasks.md` includes the install step.
 - **Two test commands instead of one combined `test`** → Intentional: `vitest run` should be fast and pre-commit-friendly; `test:e2e` boots a real server and is heavier.
 - **Vitest config inside `vite.config.ts` needs a triple-slash ref to types** → Mitigation: add `/// <reference types="vitest/config" />` at the top of `vite.config.ts` if TS complains; otherwise rely on `@ts-expect-error` only if necessary.

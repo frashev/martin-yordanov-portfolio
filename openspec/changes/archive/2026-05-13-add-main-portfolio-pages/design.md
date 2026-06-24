@@ -42,7 +42,7 @@ Two prior changes shipped: `create-site-foundation` (routing, layout, baseline p
 ### Hero refresh
 
 - Two-column on `md+` (text left, decorative placeholder right — an inline SVG monogram, still no shipped image). Single-column stacked below `md`.
-- Primary CTA "Book Nikoleta" → `/contact`; secondary text link "Read about Nikoleta" → `/about`.
+- Primary CTA "Discuss a project" → `/contact`; secondary text link "Read about Martin" → `/about`.
 
 ### About reading layout
 

@@ -38,7 +38,7 @@ The component test suite SHALL include a test that renders the `Header` componen
 
 ### Requirement: Home CTA wiring is covered by a component test
 
-The component test suite SHALL include a test that renders the `Home` page inside a router and asserts that the primary booking CTA links to `/contact` and that a secondary link to `/about` is present.
+The component test suite SHALL include a test that renders the `Home` page inside a router and asserts that the primary inquiry CTA links to `/contact` and that a secondary link to `/projects` is present.
 
 #### Scenario: Home test asserts the CTA target
 
@@ -46,10 +46,10 @@ The component test suite SHALL include a test that renders the `Home` page insid
 - **THEN** it finds a link whose `href` (or routing `to`) resolves to `/contact`
 - **AND** that link's accessible name matches `profile.bookingCtaLabel`
 
-#### Scenario: Home test asserts the secondary About link
+#### Scenario: Home test asserts the secondary Projects link
 
 - **WHEN** the Home test runs
-- **THEN** it finds a link whose `href` (or routing `to`) resolves to `/about`
+- **THEN** it finds a link whose `href` (or routing `to`) resolves to `/projects`
 
 ### Requirement: Projects page renders one card per content item
 
@@ -78,7 +78,7 @@ The Playwright suite SHALL include a smoke spec that visits `/`, navigates via t
 #### Scenario: Smoke spec covers Home, Projects, Contact
 
 - **WHEN** the smoke spec runs
-- **THEN** it loads `/` and asserts that the "Nikoleta Kaito" heading and the booking CTA labelled `profile.bookingCtaLabel` are visible
+- **THEN** it loads `/` and asserts that the "Martin Yordanov" heading and the booking CTA labelled `profile.bookingCtaLabel` are visible
 - **AND** it activates the Projects nav link and asserts that the Projects page heading is visible
 - **AND** it activates the Contact nav link and asserts that the Contact page heading and the placeholder email are visible
 

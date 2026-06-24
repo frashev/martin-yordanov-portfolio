@@ -22,8 +22,8 @@ Supabase contact service.
 #### Scenario: Step two collects inquiry type
 
 - **WHEN** step one is valid and the visitor continues
-- **THEN** the form asks for an inquiry type from Performance, Workshop, Private
-  lesson, or Other
+- **THEN** the form asks for an inquiry type from Commission, Collaboration,
+  Documentation, or Repair or technical question
 - **AND** the selected inquiry type is submitted as the existing `subject` field
 
 #### Scenario: Step three submits message

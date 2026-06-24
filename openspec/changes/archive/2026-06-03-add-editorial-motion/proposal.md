@@ -1,6 +1,6 @@
 ## Why
 
-The site is visually tasteful but completely static — the only motion today is a hover color shift, a tiny card lift, and the form spinner. For a dancer-choreographer's site, a sense of life and movement is part of the brand, and modern visitors expect subtle, polished motion. This change adds "editorial motion" (Level 2): restrained entrance and interaction animation that makes the site feel alive without becoming flashy — while fully respecting the owner's `prefers-reduced-motion` setting and adding zero new dependencies.
+The site is visually tasteful but completely static — the only motion today is a hover color shift, a tiny card lift, and the form spinner. For a kinetic-object portfolio, a sense of life and movement is part of the brand, and modern visitors expect subtle, polished motion. This change adds "editorial motion" (Level 2): restrained entrance and interaction animation that makes the site feel alive without becoming flashy — while fully respecting the owner's `prefers-reduced-motion` setting and adding zero new dependencies.
 
 ## What Changes
 

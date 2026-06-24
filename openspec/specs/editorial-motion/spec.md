@@ -82,7 +82,7 @@ On the Home page, the hero elements (name, tagline, intro paragraph, and the cal
 
 ### Requirement: Scroll-reveal for sections and cards
 
-Content blocks below the initial fold - including `Card` items on the Projects, Workshops, Events, and Videos pages and major page sections - SHALL rise a small distance (~12px) as they scroll into the viewport, animating only once per element. Elements already within the viewport on load MAY animate as part of the entrance. A reusable helper (e.g. an `IntersectionObserver`-based hook/component) SHALL provide this behavior so pages do not re-implement it.
+Content blocks below the initial fold - including project cards, process cards, gallery tiles, and major page sections - SHALL rise a small distance (~12px) as they scroll into the viewport, animating only once per element. Elements already within the viewport on load MAY animate as part of the entrance. A reusable helper (e.g. an `IntersectionObserver`-based hook/component) SHALL provide this behavior so pages do not re-implement it.
 
 #### Scenario: Card reveals on scroll
 

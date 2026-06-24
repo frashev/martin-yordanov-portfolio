@@ -6,7 +6,7 @@
 
 ## 2. New content modules
 
-- [x] 2.1 Create `src/content/profile.ts` exporting `profile: Profile` with placeholder values (name, tagline, intro, bioParagraphs, bookingCtaLabel = "Book Nikoleta", contactEmail = "placeholder@example.com", contactIntro)
+- [x] 2.1 Create `src/content/profile.ts` exporting `profile: Profile` with placeholder values (name, tagline, intro, bioParagraphs, bookingCtaLabel = "Discuss a project", contactEmail = "placeholder@example.com", contactIntro)
 - [x] 2.2 Create `src/content/navigation.ts` exporting `primaryNav: readonly NavItem[]` for `/`, `/about`, `/projects`, `/workshops`, `/events`, `/gallery`, `/videos`, `/contact` (Home has `end: true`)
 - [x] 2.3 Create `src/content/media.ts` exporting `gallery: GalleryItem[]` and `videos: Video[]` (move current placeholder items over)
 
@@ -40,5 +40,5 @@
 
 - [x] 6.1 Run `npm run build` and confirm zero TypeScript and Vite errors
 - [x] 6.2 Grep `src/` for any remaining import of the deleted files (`home.ts`, `about.ts`, `contact.ts`, `gallery.ts`, `videos.ts`) and fix any stragglers — no matches
-- [x] 6.3 Grep `src/` for the literal string `Nikoleta` outside `src/content/profile.ts` and `Header.tsx` site title — only appears in Footer copyright (placeholder), Header site title, and types.ts comment; no fabricated claims
+- [x] 6.3 Grep `src/` for the literal string `Martin` outside `src/content/profile.ts` and `Header.tsx` site title — only appears in Footer copyright (placeholder), Header site title, and types.ts comment; no fabricated claims
 - [x] 6.4 Confirm each acceptance criterion by inspection: adding a project (append to `projects.ts`), updating contact email (change one line in `profile.ts`), and renaming a nav item (change one line in `navigation.ts`) each require editing exactly one file

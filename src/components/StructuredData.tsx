@@ -3,7 +3,7 @@ import { profile } from "../content/profile";
 import { siteUrl, defaultOgImagePath } from "../content/seo";
 
 // Injects a single site-wide JSON-LD (schema.org) Person block so search
-// engines can show a richer result for the performer. Built only from content
+// engines can show a richer result for Martin. Built only from content
 // that already exists — no fabricated awards, dates, or venues. Social links
 // are emitted as `sameAs` only when they are real (placeholder "#" entries are
 // skipped), so we never publish junk references.

@@ -1,6 +1,6 @@
 # Backend Roadmap
 
-This document describes the planned backend evolution for nikoleta-kaito.com.
+This document describes the planned backend evolution for martin-yordanov.com.
 V1 is active. V2, V3, and V4 are documented only — they must not be implemented
 until explicitly decided.
 
@@ -8,7 +8,7 @@ until explicitly decided.
 
 ## V1 — Active now
 
-**Supabase direct insert for contact and booking submissions.**
+**Supabase direct insert for contact and project inquiries.**
 
 - Frontend inserts directly into the `contact_messages` Supabase table.
 - Uses the publishable (anon) key only — safe to include in browser bundles.
@@ -48,14 +48,14 @@ or additional server-side validation is required.
 
 **Add Supabase Auth, admin pages, and dynamic media handling.**
 
-When to consider: Nikoleta needs to edit content herself, manage bookings,
+When to consider: Martin needs to edit content himself, manage inquiries,
 or publish a dynamic gallery.
 
 - Add Supabase Auth for admin login (magic link or OAuth).
 - Design RLS policies for admin-only read/update access before building UI.
 - Add admin-only pages hidden behind auth guards.
-- Make projects, events, and workshops editable from Supabase (requires
-  migrating those content files to DB tables).
+- Make projects, process notes, and gallery entries editable from Supabase
+  (requires migrating those content files to DB tables).
 - Add Supabase Storage or Cloudinary for gallery images.
 - Do not store large videos in Supabase Storage — prefer YouTube, Vimeo,
   or a dedicated video platform and embed.
@@ -64,7 +64,7 @@ or publish a dynamic gallery.
 
 ## V4 — Future: payments
 
-**Add payment processing for workshops, private lessons, or merchandise.**
+**Add payment processing for commissions, deposits, or merchandise.**
 
 When to consider: payment requirements are clear and tested on V3.
 
@@ -73,7 +73,7 @@ When to consider: payment requirements are clear and tested on V3.
 - Use Stripe Checkout or a similar provider.
 - Create checkout sessions server-side; use webhooks to write payment
   status to Supabase.
-- Add `bookings` and `payments` tables only once payment requirements
+- Add `inquiries` and `payments` tables only once payment requirements
   are fully specified.
 - Stripe secret keys (`sk_live_*`, `sk_test_*`) are stored as server-side
   secrets only, never in Vite environment variables.

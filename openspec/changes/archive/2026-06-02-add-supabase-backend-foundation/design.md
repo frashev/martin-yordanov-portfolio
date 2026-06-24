@@ -1,6 +1,6 @@
 ## Context
 
-The site is a static React + Vite + TypeScript SPA deployed to Cloudflare Workers Static Assets (`nikoleta-kaito.com`). There is no server runtime — all code runs in the browser. The Contact page currently renders a form but does nothing on submit. The goal is to add a real submission path using Supabase as a managed backend, keeping the architecture entirely static and the frontend bundle the only deployable artefact.
+The site is a static React + Vite + TypeScript SPA deployed to Cloudflare Workers Static Assets (`martin-yordanov.com`). There is no server runtime — all code runs in the browser. The Contact page currently renders a form but does nothing on submit. The goal is to add a real submission path using Supabase as a managed backend, keeping the architecture entirely static and the frontend bundle the only deployable artefact.
 
 Supabase's JavaScript client can call the Supabase REST/PostgREST API directly from the browser using the publishable anon key. Row Level Security restricts what anon users can do; V1 only grants `INSERT` on `contact_messages`.
 
@@ -73,7 +73,7 @@ Supabase's JavaScript client can call the Supabase REST/PostgREST API directly f
 
 **Decision:** The `contact_messages` table includes a `source text default 'website'` column.
 
-**Why:** Future booking widget, social link, or email CTA may submit to the same table. The source column lets Nikoleta filter submissions by origin without a schema change.
+**Why:** Future booking widget, social link, or email CTA may submit to the same table. The source column lets Martin filter submissions by origin without a schema change.
 
 ## Risks / Trade-offs
 
@@ -102,4 +102,4 @@ Future migration paths (V2 server-side proxy, V3 auth/admin, V4 payments) are do
 ## Open Questions
 
 - Should a `phone` field be present on the Contact form in V1, or remain optional/hidden? (It is in the DB schema but can be omitted from the UI form.)
-- Does Nikoleta want a `subject` dropdown (e.g. "Booking", "Workshop enquiry", "General") or a free-text subject field? Default: free-text optional field matching existing placeholder.
+- Does Martin want a `subject` dropdown (e.g. "Booking", "Workshop enquiry", "General") or a free-text subject field? Default: free-text optional field matching existing placeholder.

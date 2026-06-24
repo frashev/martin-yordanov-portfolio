@@ -3,22 +3,22 @@
 ### Requirement: Each page has a unique document title
 
 Every route SHALL render a `<title>` that clearly identifies the page and the site.
-Format: `<Page Name> — Nikoleta Kaito` (home page uses just `Nikoleta Kaito — Latin Dancer & Choreographer`).
+Format: `<Page Name> — Martin Yordanov` (home page uses just `Martin Yordanov — Kinetic Furniture & Drawing Machines`).
 
 #### Scenario: Home page title
 
 - **WHEN** a visitor navigates to `/`
-- **THEN** the browser tab and `document.title` read `Nikoleta Kaito — Latin Dancer & Choreographer`
+- **THEN** the browser tab and `document.title` read `Martin Yordanov — Kinetic Furniture & Drawing Machines`
 
 #### Scenario: Inner page title
 
 - **WHEN** a visitor navigates to `/projects`
-- **THEN** `document.title` reads `Projects — Nikoleta Kaito`
+- **THEN** `document.title` reads `Projects — Martin Yordanov`
 
 #### Scenario: Title updates on route change
 
 - **WHEN** a visitor navigates from `/` to `/contact`
-- **THEN** `document.title` updates to `Contact — Nikoleta Kaito` without a full page reload
+- **THEN** `document.title` updates to `Contact — Martin Yordanov` without a full page reload
 
 #### Scenario: All 8 routes have distinct titles
 
@@ -108,4 +108,4 @@ The static `index.html` SHALL have a human-readable `<title>` as a fallback for 
 #### Scenario: Index.html fallback title
 
 - **WHEN** the raw `index.html` is inspected (before JS loads)
-- **THEN** `<title>` reads `Nikoleta Kaito` (not `nikoleta-kaito-website`)
+- **THEN** `<title>` reads `Martin Yordanov` (not `martin-yordanov-website`)

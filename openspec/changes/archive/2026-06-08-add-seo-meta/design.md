@@ -1,6 +1,6 @@
 ## Context
 
-The site currently has a single hard-coded `<title>nikoleta-kaito-website</title>` in `index.html` and no `<meta>` or Open Graph tags anywhere. React Router 7 with Vite renders a client-side SPA — the HTML shell is static and the DOM is patched at runtime by React. Meta tag updates must therefore happen client-side (no SSR in this stack).
+The site currently has a single hard-coded `<title>martin-yordanov-website</title>` in `index.html` and no `<meta>` or Open Graph tags anywhere. React Router 7 with Vite renders a client-side SPA — the HTML shell is static and the DOM is patched at runtime by React. Meta tag updates must therefore happen client-side (no SSR in this stack).
 
 ## Goals / Non-Goals
 
@@ -53,7 +53,7 @@ The site currently has a single hard-coded `<title>nikoleta-kaito-website</title
 
 - **Social crawlers may not execute JS** → OG tags set by `useEffect` are invisible to non-JS scrapers (e.g. older Twitter/X card bots). Mitigation: Most modern crawlers (LinkedIn, Facebook, Slack, WhatsApp, iMessage) do execute JS or re-fetch after hydration. This is a known SPA trade-off; full solution requires SSR or pre-rendering, which is out of scope.
 - **Stale tags on fast navigation** → if `useEffect` cleanup misses a tag, old values persist. Mitigation: the `PageMeta` component explicitly removes or overwrites every tag it owns on each render, and removes them on unmount.
-- **All content is placeholder** → titles like "Nikoleta Kaito — Projects" are correct in structure but the descriptions will say "Placeholder…" until the client provides copy. Mitigation: the structure is right; copy swap is a Tiny change later.
+- **All content is placeholder** → titles like "Martin Yordanov — Projects" are correct in structure but the descriptions will say "Placeholder…" until the client provides copy. Mitigation: the structure is right; copy swap is a Tiny change later.
 
 ## Open Questions
 

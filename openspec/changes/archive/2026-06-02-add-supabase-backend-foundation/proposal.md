@@ -1,6 +1,6 @@
 ## Why
 
-The contact page currently has no working submission path — users cannot reach Nikoleta. A lightweight Supabase direct-insert integration provides a real backend for contact and booking requests without adding server infrastructure, auth, or payments in V1.
+The contact page currently has no working submission path — users cannot reach Martin. A lightweight Supabase direct-insert integration provides a real backend for contact and booking requests without adding server infrastructure, auth, or payments in V1.
 
 ## What Changes
 

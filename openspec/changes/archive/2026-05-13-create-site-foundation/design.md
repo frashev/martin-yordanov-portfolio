@@ -1,6 +1,6 @@
 ## Context
 
-The repository currently holds a fresh Vite + React + TypeScript scaffold with no routing, styling system, or pages. Nikoleta Kaito is a professional Latin dancer; the site needs to look credible and make booking obvious, but real biography, achievements, and media will only be supplied later. This change establishes the structural foundation so that subsequent changes (real content, gallery media, booking integration) can plug in without rewrites.
+The repository currently holds a fresh Vite + React + TypeScript scaffold with no routing, styling system, or pages. Martin Yordanov is a maker of kinetic furniture and drawing machines; the site needs to look credible and make booking obvious, but real biography, achievements, and media will only be supplied later. This change establishes the structural foundation so that subsequent changes (real content, gallery media, booking integration) can plug in without rewrites.
 
 ## Goals / Non-Goals
 
@@ -49,7 +49,7 @@ The repository currently holds a fresh Vite + React + TypeScript scaffold with n
 
 ### Placeholder copy policy
 
-- Components display unmistakably generic copy (e.g. "Placeholder bio — to be provided by Nikoleta") and never fabricated specifics. Comments in content files state this rule.
+- Components display unmistakably generic copy (e.g. "Placeholder bio — to be provided by Martin") and never fabricated specifics. Comments in content files state this rule.
 - Rationale: protects the subject from false claims and makes the "needs real content" status obvious during review.
 
 ### SPA hosting fallback: `public/_redirects`
